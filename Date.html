@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #fceaff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #conteudo {
+        text-align: center;
+        padding: 40px;
+        background-color: #ffffffcc;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+      }
+
+      h2 {
+        color: #6a0572;
+        margin-bottom: 30px;
+        font-size: 24px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-yes {
+        background-color: #ffd166;
+        color: #6a0572;
+      }
+
+      .btn-yes:hover {
+        background-color: #ffe29a;
+      }
+
+      .btn-no {
+        background-color: #ff6b6b;
+        color: white;
+        position: relative;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      /* Corações animados */
+      .heart {
+        position: absolute;
+        color: #ff69b4;
+        font-size: 20px;
+        animation: float 6s infinite ease-in-out;
+        opacity: 0.7;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.7;
+        }
+        50% {
+          transform: translateY(-100vh) scale(1.5);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-200vh) scale(1);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="conteudo">
+      <h2>Do you wanna hang out?</h2>
+      <a
+        href="https://www.youtube.com/watch?v=a3HZ8S2H-GQ&list=PLfsOHLT-uBoi6Q926mh8fyMblybNaatcr&index=15"
+      >
+        <button class="btn btn-yes">Yes</button>
+      </a>
+      <button class="btn btn-no" onclick="desvia(this)" onmouseover="desvia(this)">
+        No
+      </button>
+    </div>
+
+    <!-- Corações gerados dinamicamente -->
+    <script>
+      function desvia(btn) {
+        btn.style.position = "absolute";
+        btn.style.bottom = geraPosicao(10, 90);
+        btn.style.left = geraPosicao(10, 90);
+      }
+
+      function geraPosicao(min, max) {
+        return Math.random() * (max - min) + min + "%";
+      }
+
+      // Criar corações animados
+      function criarCoracoes() {
+        for (let i = 0; i < 30; i++) {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+          heart.innerHTML = "❤";
+          document.body.appendChild(heart);
+
+          // Remover após a animação
+          setTimeout(() => {
+            heart.remove();
+          }, 6000);
+        }
+      }
+
+      setInterval(criarCoracoes, 1000); // Novos corações a cada segundo
+    </script>
+  </body>
+</html>
